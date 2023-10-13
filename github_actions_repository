@@ -1,0 +1,20 @@
+terraform {
+  required_version = ">= 1.6"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.20"
+    }
+  }
+}
+
+resource "github_repository" "example" {
+  name       = "my-repository"
+  visibility = "private"
+}
+
+resource "github_actions_repository_access_level" "test" {
+  access_level = "user"
+  repository   = github_repository.example.name
+}
